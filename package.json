@@ -1,6 +1,6 @@
 {
   "name": "create-coffee-app",
-  "version": "1.0.1",
+  "version": "1.1.1",
   "description": "Create a Coffeescript app using ViteJS",
   "main": "index.js",
   "scripts": {
