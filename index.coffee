@@ -53,20 +53,17 @@ confirm = (msg, callback) ->
   return if !confirmed
   callback()
 
-exists = (responce) ->
-  confirm "OVERRIDE '#{responce.name}'", ->
-    fs.rmSync "./#{responce.name}",
-      force: on
-      recursive: on
-    clone(responce)
-
 main = ->
   responce = await prompts(questions)
 
   return if !responce.repo?
   
   if fs.existsSync "./#{responce.name}"
-    exists(responce)
+    confirm "OVERRIDE '#{responce.name}'", ->
+      fs.rmSync "./#{responce.name}",
+        force: on
+        recursive: on
+      clone(responce)
   else
     clone(responce)
 
