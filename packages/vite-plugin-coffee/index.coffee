@@ -10,4 +10,4 @@ coffee = ({ jsx }) ->
       code: js
       map: sourceMap
 
-export default coffee
+module.exports = coffee
