@@ -4,12 +4,16 @@ prompts = require 'prompts'
 
 repos = [
   {
-    title: 'Coffeescript-Vanilla'
+    title: 'Coffeescript'
     value: 'LegoLoverGo/vite-coffee'
   }
   {
     title: 'Coffeescript-React'
     value: 'LegoLoverGo/vite-coffee-react'
+  }
+  {
+    title: 'Coffeescript-Svelte'
+    value: 'LegoLoverGo/vite-coffee-svelte'
   }
 ]
 
