@@ -24,7 +24,5 @@
     "degit": "^2.8.4",
     "prompts": "^2.4.1"
   },
-  "bin": {
-    "create-coffee-app": "./index.js"
-  }
+  "bin": "./index.js"
 }
