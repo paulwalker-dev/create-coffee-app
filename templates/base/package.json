@@ -1,6 +1,6 @@
 {
   "name": "vite-coffee-template",
-  "version": "0.0.0",
+  "version": "2.0.0-alpha.0",
   "scripts": {
     "dev": "vite",
     "build": "vite build",
@@ -8,7 +8,7 @@
   },
   "devDependencies": {
     "vite": "^2.3.7",
-    "vite-plugin-coffee": "^0.0.0"
+    "vite-plugin-coffee": "^2.0.0-alpha.0"
   },
   "private": true
 }
