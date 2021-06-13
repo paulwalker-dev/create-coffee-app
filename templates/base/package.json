@@ -1,0 +1,14 @@
+{
+  "name": "vite-coffee-template",
+  "version": "0.0.0",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "serve": "vite preview"
+  },
+  "devDependencies": {
+    "vite": "^2.3.7",
+    "vite-plugin-coffee": "^0.0.0"
+  },
+  "private": true
+}

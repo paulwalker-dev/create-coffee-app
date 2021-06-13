@@ -1,0 +1,27 @@
+{
+  "name": "vite-plugin-coffee",
+  "version": "0.0.0",
+  "description": "Coffeescript plugin for Vitejs",
+  "main": "dist/index.js",
+  "scripts": {
+    "prepublish": "coffee -o dist -c index.coffee"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/LegoLoverGo/create-coffee-app.git"
+  },
+  "keywords": [
+    "coffeescript"
+  ],
+  "author": "Paul Walker",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/LegoLoverGo/create-coffee-app/issues"
+  },
+  "homepage": "https://github.com/LegoLoverGo/create-coffee-app#readme",
+  "dependencies": {
+    "@babel/core": "^7.14.5",
+    "@babel/preset-react": "^7.14.5",
+    "coffeescript": "^2.5.1"
+  }
+}

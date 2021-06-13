@@ -1,0 +1,25 @@
+{
+  "name": "create-coffee-app",
+  "description": "Create a Coffeescript app using Vitejs",
+  "main": "index.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/LegoLoverGo/create-coffee-app.git"
+  },
+  "keywords": [
+    "coffeescript"
+  ],
+  "author": "Paul Walker",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/LegoLoverGo/create-coffee-app/issues"
+  },
+  "homepage": "https://github.com/LegoLoverGo/create-coffee-app#readme",
+  "dependencies": {
+    "coffeescript": "^2.5.1",
+    "degit": "^2.8.4",
+    "prompts": "^2.4.1"
+  },
+  "bin": "./index.js",
+  "version": "0.0.0"
+}

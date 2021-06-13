@@ -5,15 +5,15 @@ prompts = require 'prompts'
 repos = [
   {
     title: 'Coffeescript'
-    value: 'LegoLoverGo/vite-coffee'
+    value: 'base'
   }
   {
     title: 'Coffeescript-React'
-    value: 'LegoLoverGo/vite-coffee-react'
+    value: 'react'
   }
   {
     title: 'Coffeescript-Svelte'
-    value: 'LegoLoverGo/vite-coffee-svelte'
+    value: 'svelte'
   }
 ]
 
@@ -26,20 +26,30 @@ questions = [
   },
   {
     type: 'select'
-    name: 'repo'
+    name: 'type'
     message: 'Type'
     choices: repos
     initial: 0
   }
 ]
 
-clone = ({ name, repo }) ->
-  emitter = degit repo,
+bootstrap = ({ name, type }) ->
+  repo = degit "LegoLoverGo/create-coffee-app/templates/#{type}",
     cache: off
     verbose: off
     force: off
 
-  await emitter.clone name
+  assets = degit 'LegoLoverGo/create-coffee-app/templates/assets',
+    cache: off
+    verbose: off
+    force: off
+
+  console.log 'Cloning template'
+  await repo.clone name
+
+  console.log 'Getting assets'
+  await assets.clone "#{name}/src/assets"
+
   console.log 'Done'
 
 confirm = (msg, callback) ->
@@ -60,7 +70,7 @@ confirm = (msg, callback) ->
 main = ->
   responce = await prompts(questions)
 
-  return if !responce.repo?
+  return if !responce.type?
   
   if fs.existsSync "./#{responce.name}"
     confirm "OVERRIDE '#{responce.name}'", ->

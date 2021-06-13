@@ -1,0 +1,9 @@
+#app {
+  font-family: sans-serif;
+
+  display: grid;
+  height: 100vh;
+
+  justify-content: center;
+  align-content: center;
+}

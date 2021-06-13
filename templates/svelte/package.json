@@ -1,0 +1,17 @@
+{
+  "name": "vite-coffee-svelte-template",
+  "version": "0.0.0",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "serve": "vite preview"
+  },
+  "devDependencies": {
+    "@sveltejs/vite-plugin-svelte": "^1.0.0-next.11",
+    "svelte": "^3.38.2",
+    "svelte-preprocess": "^4.7.3",
+    "vite": "^2.3.7",
+    "vite-plugin-coffee": "^0.0.0"
+  },
+  "private": true
+}
