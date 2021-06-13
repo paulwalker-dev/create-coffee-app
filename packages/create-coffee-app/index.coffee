@@ -33,7 +33,7 @@ questions = [
   }
 ]
 
-bootstrap = ({ name, type }) ->
+clone = ({ name, type }) ->
   repo = degit "LegoLoverGo/create-coffee-app/templates/#{type}",
     cache: off
     verbose: off

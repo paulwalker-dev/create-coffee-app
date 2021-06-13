@@ -1,5 +1,5 @@
 <script lang="coffee">
-  title = 'Vite App'
+  title = 'Create Coffee App'
 </script>
 
 <main>
