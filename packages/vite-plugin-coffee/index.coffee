@@ -1,3 +1,5 @@
+import CoffeeScript from 'coffeescript'
+
 coffee = ({ jsx }) ->
   name: 'coffee'
   transform: (src, id) ->
