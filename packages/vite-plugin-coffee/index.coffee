@@ -1,4 +1,4 @@
-import CoffeeScript from 'coffeescript'
+CoffeeScript = require 'coffeescript'
 
 coffee = ({ jsx }) ->
   name: 'coffee'
