@@ -28,7 +28,7 @@ argv = yargs hideBin process.argv
     'b':
       alias: 'branch'
       type: 'string'
-      default: 'add-testing'
+      default: 'main'
       group: 'Dev:'
       desc: 'Branch of the repo to use'
       hidden: yes
