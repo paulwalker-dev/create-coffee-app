@@ -6,7 +6,7 @@ util = require 'util'
 yargs = require 'yargs/yargs'
 
 argv = yargs hideBin process.argv
-  .usage 'Usage: $0 [directory] [options]'
+  .usage 'Usage: npm init coffee-app@latest -- [directory] [options]'
   .options
     't':
       alias: 'template'
