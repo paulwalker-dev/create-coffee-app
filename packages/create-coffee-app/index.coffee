@@ -6,20 +6,35 @@ util = require 'util'
 yargs = require 'yargs/yargs'
 
 argv = yargs hideBin process.argv
-  .usage 'Usage: $0 [directory] '
+  .usage 'Usage: $0 [directory] [options]'
   .options
     't':
       alias: 'template'
-      choices: [
-        'base'
-        'react'
-        'svelte'
-      ]
+      type: 'string'
+      group: 'General:'
+      desc: 'Template Name'
     'f':
       alias: 'force'
       type: 'boolean'
-  .help 'help'
-  .alias 'help', 'h'
+      group: 'General:'
+      desc: 'Bypass override prompt'
+    'r':
+      alias: 'repo'
+      type: 'string'
+      default: 'LegoLoverGo/create-coffee-app'
+      group: 'Dev:'
+      desc: 'Repo on Github to use'
+      hidden: yes
+    'b':
+      alias: 'branch'
+      type: 'string'
+      default: 'main'
+      group: 'Dev:'
+      desc: 'Branch of the repo to use'
+      hidden: yes
+  .showHidden 'show-dev', 'Show dev flags'
+  .help 'h'
+  .alias 'h', 'help'
   .argv
 
 repos = [
@@ -55,12 +70,12 @@ if !argv.t?
     initial: 0
 
 clone = ({ name, type }) ->
-  repo = degit "LegoLoverGo/create-coffee-app/templates/#{type}",
+  repo = degit "#{argv.r}/templates/#{type}##{argv.b}",
     cache: off
     verbose: off
     force: off
 
-  assets = degit 'LegoLoverGo/create-coffee-app/templates/assets',
+  assets = degit "#{argv.r}/templates/assets##{argv.b}",
     cache: off
     verbose: off
     force: off
