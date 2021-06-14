@@ -7,5 +7,5 @@ Create a Coffeescript app using [Vitejs](https://vitejs.dev)
 ## Usage
 
 ```sh
-npm init coffee-app
+npm init coffee-app@latest
 ```
