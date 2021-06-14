@@ -18,7 +18,8 @@
   "dependencies": {
     "coffeescript": "^2.5.1",
     "degit": "^2.8.4",
-    "prompts": "^2.4.1"
+    "prompts": "^2.4.1",
+    "yargs": "^17.0.1"
   },
   "bin": "./index.js",
   "version": "2.0.1"

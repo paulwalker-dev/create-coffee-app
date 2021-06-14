@@ -1,6 +1,25 @@
+{ hideBin } = require 'yargs/helpers'
 degit = require 'degit'
 fs = require 'fs'
 prompts = require 'prompts'
+yargs = require 'yargs/yargs'
+
+argv = yargs hideBin process.argv
+  .usage 'Usage: $0 [directory] '
+  .options
+    't':
+      alias: 'template'
+      choices: [
+        'base'
+        'react'
+        'svelte'
+      ]
+    'f':
+      alias: 'force'
+      type: 'boolean'
+  .help 'help'
+  .alias 'help', 'h'
+  .argv
 
 repos = [
   {
@@ -17,21 +36,22 @@ repos = [
   }
 ]
 
-questions = [
-  {
+questions = []
+
+if !argv._[0]?
+  questions.push
     type: 'text'
     name: 'name'
     message: 'Project Name'
     initial: 'coffee-project'
-  },
-  {
+
+if !argv.t?
+  questions.push
     type: 'select'
     name: 'type'
     message: 'Type'
     choices: repos
     initial: 0
-  }
-]
 
 clone = ({ name, type }) ->
   repo = degit "LegoLoverGo/create-coffee-app/templates/#{type}",
@@ -51,8 +71,13 @@ clone = ({ name, type }) ->
   await assets.clone "#{name}/src/assets"
 
   console.log 'Done'
+  process.exit()
 
 confirm = (msg, callback) ->
+  if argv.f
+    callback()
+    return
+
   { confirmed } = await prompts [
     type: 'toggle'
     name: 'confirmed'
@@ -69,6 +94,8 @@ confirm = (msg, callback) ->
 
 main = ->
   responce = await prompts(questions)
+  responce.name ?= argv._[0]
+  responce.type ?= argv.t
 
   return if !responce.type?
   
