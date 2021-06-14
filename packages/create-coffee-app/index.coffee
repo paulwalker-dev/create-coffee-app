@@ -28,7 +28,7 @@ argv = yargs hideBin process.argv
     'b':
       alias: 'branch'
       type: 'string'
-      default: 'main'
+      default: 'add-testing'
       group: 'Dev:'
       desc: 'Branch of the repo to use'
       hidden: yes
@@ -94,12 +94,6 @@ clone = ({ name, type, testing }) ->
     verbose: off
     force: off
 
-  if testing
-    tests = degit "#{argv.r}/templates/testing##{argv.b}",
-      cache: off
-      verbose: off
-      force: on
-
   console.log 'Cloning template'
   await repo.clone name
 
@@ -112,12 +106,13 @@ clone = ({ name, type, testing }) ->
   pkg.version = '0.0.0'
 
   if testing
-    console.log 'Configuring Tests'
+    console.log 'Configuring tests'
+
     pkg.devDependencies = {
-      'vite-web-test-runner-plugin': '^0.0.0'
-      '@web/test-runner-playwright': '^0.0.0'
-      "@esm-bundles/chai": '^2.0.0'
-      '@web/test-runner': '^0.0.0'
+      'vite-web-test-runner-plugin': '^0.0.3'
+      '@web/test-runner-playwright': '^0.8.6'
+      '@web/test-runner': '^0.13.11'
+      "@esm-bundle/chai": '^4.3.4'
       ...pkg.devDependencies
     }
 
@@ -126,8 +121,13 @@ clone = ({ name, type, testing }) ->
 
     pkg.scripts['test:watch'] =
       "#{pkg.scripts.test} --watch"
+  else
+    console.log 'Removing test files'
 
-    await tests.clone "#{name}"
+    fs.rmSync "#{name}/test",
+      force: on
+      recursive: on
+    fs.rmSync "#{name}/web-test-runner.config.js"
 
   fs.writeFileSync "#{name}/package.json",
     JSON.stringify(pkg, null, 2)
