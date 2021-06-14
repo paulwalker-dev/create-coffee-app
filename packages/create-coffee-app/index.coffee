@@ -117,7 +117,7 @@ clone = ({ name, type, testing }) ->
     }
 
     pkg.scripts.test =
-      'coffee -c test && wtr test/**/*.test.js --node-resolve --playwright'
+      'coffee -c test && wtr test/**/*.test.js --node-resolve'
 
     pkg.scripts['test:watch'] =
       "#{pkg.scripts.test} --watch"
