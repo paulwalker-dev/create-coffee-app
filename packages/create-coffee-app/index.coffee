@@ -2,6 +2,7 @@
 degit = require 'degit'
 fs = require 'fs'
 prompts = require 'prompts'
+util = require 'util'
 yargs = require 'yargs/yargs'
 
 argv = yargs hideBin process.argv
@@ -69,6 +70,13 @@ clone = ({ name, type }) ->
 
   console.log 'Getting assets'
   await assets.clone "#{name}/src/assets"
+
+  console.log 'Editing package.json'
+  pkg = JSON.parse fs.readFileSync("#{name}/package.json").toString()
+  pkg.name = name
+  pkg.version = '0.0.0'
+  fs.writeFileSync "#{name}/package.json",
+    JSON.stringify(pkg, null, 2)
 
   console.log 'Done'
   process.exit()
