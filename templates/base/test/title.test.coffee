@@ -1,16 +1,15 @@
 import { expect } from '@esm-bundle/chai'
-import App from '../src/App.svelte'
 
 describe 'App', ->
-  before =>
+  before () ->
     appDiv = document.createElement 'div'
-    appDiv.id = 'app'
     document.body.appendChild appDiv
+    appDiv.id = 'app'
 
-    app = new App
-      target: appDiv
+    `await import('../src/index.coffee')`
+    await return
 
   describe 'title', ->
     it "equals 'Create Coffee App'", ->
-      expect document.querySelector('#app main h1').innerText
+      expect document.querySelector('#app h1').innerText
         .to.equal 'Create Coffee App'
