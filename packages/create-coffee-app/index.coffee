@@ -32,6 +32,11 @@ argv = yargs hideBin process.argv
       group: 'Dev:'
       desc: 'Branch of the repo to use'
       hidden: yes
+    'a':
+      alias: 'add-testing'
+      type: 'boolean'
+      group: 'General:'
+      desc: 'Configure Testing'
   .showHidden 'show-dev', 'Show dev flags'
   .help 'h'
   .alias 'h', 'help'
@@ -69,7 +74,16 @@ if !argv.t?
     choices: repos
     initial: 0
 
-clone = ({ name, type }) ->
+if !argv.a?
+  questions.push
+    type: 'toggle'
+    name: 'testing'
+    message: 'Configure Testing'
+    initial: no
+    active: 'yes'
+    inactive: 'no'
+
+clone = ({ name, type, testing }) ->
   repo = degit "#{argv.r}/templates/#{type}##{argv.b}",
     cache: off
     verbose: off
@@ -79,6 +93,12 @@ clone = ({ name, type }) ->
     cache: off
     verbose: off
     force: off
+
+  if testing
+    tests = degit "#{argv.r}/templates/testing##{argv.b}",
+      cache: off
+      verbose: off
+      force: on
 
   console.log 'Cloning template'
   await repo.clone name
@@ -90,6 +110,25 @@ clone = ({ name, type }) ->
   pkg = JSON.parse fs.readFileSync("#{name}/package.json").toString()
   pkg.name = name
   pkg.version = '0.0.0'
+
+  if testing
+    console.log 'Configuring Tests'
+    pkg.devDependencies = {
+      'vite-web-test-runner-plugin': '^0.0.0'
+      '@web/test-runner-playwright': '^0.0.0'
+      "@esm-bundles/chai": '^2.0.0'
+      '@web/test-runner': '^0.0.0'
+      ...pkg.devDependencies
+    }
+
+    pkg.scripts.test =
+      'coffee -c test && wtr test/**/*.test.js --node-resolve --playwright'
+
+    pkg.scripts['test:watch'] =
+      "#{pkg.scripts.test} --watch"
+
+    await tests.clone "#{name}"
+
   fs.writeFileSync "#{name}/package.json",
     JSON.stringify(pkg, null, 2)
 
@@ -105,7 +144,7 @@ confirm = (msg, callback) ->
     type: 'toggle'
     name: 'confirmed'
     message: ''
-    initial: false
+    initial: no
     active: 'yes'
     inactive: 'no'
     onRender: (kleur) ->
@@ -119,6 +158,7 @@ main = ->
   responce = await prompts(questions)
   responce.name ?= argv._[0]
   responce.type ?= argv.t
+  responce.testing ?= argv.a
 
   return if !responce.type?
   

@@ -4,7 +4,7 @@ import './App.css'
 App = ->
   title = 'Create Coffee App'
 
-  <main id="app">
+  <main>
     <h1>{title}</h1>
   </main>
 
