@@ -1,7 +1,7 @@
 import { defineConfig } from "vite";
 import coffee from "vite-plugin-coffee";
 import { svelte } from "@sveltejs/vite-plugin-svelte";
-import { coffeescript } from "svelte-preprocess";
+import sveltePreprocess from "svelte-preprocess";
 
 export default defineConfig({
   plugins: [
@@ -9,7 +9,9 @@ export default defineConfig({
       jsx: false,
     }),
     svelte({
-      preprocess: [coffeescript()],
+      preprocess: sveltePreprocess({
+        coffeescript: {},
+      }),
     }),
   ],
 });
