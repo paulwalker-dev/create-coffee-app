@@ -1,4 +1,5 @@
 # Create Coffee App
+**Not maintained**
 
 ![Create Coffee App Logo](https://raw.githubusercontent.com/LegoLoverGo/create-coffee-app/main/assets/logo.svg)
 
